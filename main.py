@@ -1,6 +1,8 @@
 import logging
-from telegram import Update, CallbackQuery
+from telegram import Update
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, filters, MessageHandler
+
+import readWrite
 
 token = "6591688320:AAEBPbOC9yZjQAhg7QYBOAdeduh7rgb4Q6U"
 poopEmoji = '\U0001F4A9'
@@ -37,7 +39,7 @@ async def poop(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if(update.message.text == poopEmoji):
         await context.bot.send_message(
             chat_id= update.effective_chat.id,
-            text= "DEJA DE CAGAR"
+            text= "DEJA DE CAGAR " + update.message.from_user.first_name
         )
 
 async def count(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -70,5 +72,7 @@ if __name__ == '__main__':
     application.add_handler(poop_handler)
     application.add_handler(count_handler)
     application.add_handler(unknown_handler) # siempre el último en ser añadido
+
+    
 
     application.run_polling()
