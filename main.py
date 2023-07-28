@@ -44,12 +44,12 @@ async def poop(update: Update, context: ContextTypes.DEFAULT_TYPE):
             chat_id= update.effective_chat.id,
             text= input
         )
-        """
+        """ 
 
 async def count(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
-        text= poopEmoji
+        text= rw.count()
     )
 
 async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
