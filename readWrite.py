@@ -1,30 +1,26 @@
 import os
 import csv
+from csv import writer
 import string
+import datetime
 
 nameFile = "PoopCount.csv"
-fields = ['Name','Count']
+fields = ['Name','Date']
 #format -> name : count
 
-def add(name: string):
+def add(name: string, date: datetime):
     if(not os.path.isfile(nameFile)):
-        dict = [{'Name':name, 'Count':'1'}]
+        input = [{'Name':name, 'Date':str(date)}]
         file = open(nameFile,'x')
-        writer = csv.DictWriter(file,fieldnames=fields)
-        writer.writeheader()
-        writer.writerows(dict)
+        writer_file = csv.DictWriter(file,fieldnames=fields)
+        writer_file.writeheader()
+        writer_file.writerows(input)
         file.close()
     else:
-        with open(nameFile) as file:
-            reader = csv.DictReader(file, fieldnames=fields)
-            writer = csv.DictWriter(file, fieldnames=fields)
-            for row in reader:
-                if row['Name'] == name:
-                    row['Name'],row['Count'] = row['Name'],str(int(row['Count'])+1)
-                row = {'Name':row['Name'], 'Count':row['Count']}
-                writer.writerow(row)
+        with open(nameFile, mode='a') as file:
+            input = [{'Name':name, 'Date':str(date)}]
+            writer_file = writer(file)
+            writer_file.writerow(input)
 
 
-
-add("Alfonso")
     

@@ -2,7 +2,7 @@ import logging
 from telegram import Update
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, filters, MessageHandler
 
-import readWrite
+import readWrite as rw
 
 token = "6591688320:AAEBPbOC9yZjQAhg7QYBOAdeduh7rgb4Q6U"
 poopEmoji = '\U0001F4A9'
@@ -37,10 +37,13 @@ async def caps(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def poop(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if(update.message.text == poopEmoji):
+        rw.add(update.message.from_user.first_name,update.message.date.date)
+        """
         await context.bot.send_message(
             chat_id= update.effective_chat.id,
             text= "DEJA DE CAGAR " + update.message.from_user.first_name
         )
+        """
 
 async def count(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
