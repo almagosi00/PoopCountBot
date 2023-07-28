@@ -5,22 +5,21 @@ import string
 import datetime
 
 nameFile = "PoopCount.csv"
-fields = ['Name','Date']
-#format -> name : count
+separador = ';'
+#formato -> nombre;fecha;hora
 
 def add(name: string, date: datetime):
+    """
     if(not os.path.isfile(nameFile)):
-        input = [{'Name':name, 'Date':str(date)}]
-        file = open(nameFile,'x')
-        writer_file = csv.DictWriter(file,fieldnames=fields)
-        writer_file.writeheader()
-        writer_file.writerows(input)
         file.close()
-    else:
-        with open(nameFile, mode='a') as file:
-            input = [{'Name':name, 'Date':str(date)}]
-            writer_file = writer(file)
-            writer_file.writerow(input)
+    """
+
+    os.path.isfile(nameFile)
+
+    with open(nameFile, mode='a') as file:
+        input = name + separador + str(date.date()) + separador + str(date.time()) +"\n"
+        file.write(input)
+
 
 
     

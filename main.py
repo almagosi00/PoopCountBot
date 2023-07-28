@@ -37,11 +37,12 @@ async def caps(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def poop(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if(update.message.text == poopEmoji):
-        rw.add(update.message.from_user.first_name,update.message.date.date)
+        rw.add(update.message.from_user.first_name,update.message.date)
         """
+        input = update.message.from_user.first_name + ":" + str(update.message.date.date())
         await context.bot.send_message(
             chat_id= update.effective_chat.id,
-            text= "DEJA DE CAGAR " + update.message.from_user.first_name
+            text= input
         )
         """
 
