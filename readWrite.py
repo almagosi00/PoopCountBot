@@ -4,8 +4,12 @@ import string
 import datetime
 import operator
 
-nameFile = "PoopCount.csv"
+nameFileExtension = "PoopCount.csv"
+nameFile = "PoopCount"
+extension = ".csv"
 separador = ';'
+separadorNameFile = "_"
+date_format = '%Y-%m-%d'
 #formato -> nombre;fecha;hora
 
 def add(name: string, date: datetime):
@@ -14,16 +18,16 @@ def add(name: string, date: datetime):
         file.close()
     """
 
-    os.path.isfile(nameFile)
+    os.path.isfile(nameFileExtension)
 
-    with open(nameFile, mode='a') as file:
+    with open(nameFileExtension, mode='a') as file:
         input = name + separador + str(date.date()) + separador + str(date.time()) +"\n"
         file.write(input)
 
 
 def count():
     dictCount = dict()
-    with open(nameFile,mode='r') as file:
+    with open(nameFileExtension,mode='r') as file:
         rows = file.readlines()
         for row in rows:
             rowList = row.split(separador)
@@ -38,3 +42,13 @@ def count():
         output = output + "\n" + i + " --> " + str(dictCount[i])
     return output
             
+
+
+def clear(): #renombra el fichero
+    newFileName = ""
+    with open(nameFileExtension,mode='r') as file:
+        rows = file.readlines()
+        date = datetime.datetime.strptime(rows[len(rows)-1].split(separador)[1], date_format)
+        newFileName = nameFile + separadorNameFile + str(date.month) + separadorNameFile + str(date.year) + extension
+        
+    os.rename(nameFileExtension,newFileName)

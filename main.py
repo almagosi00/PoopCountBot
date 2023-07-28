@@ -47,10 +47,29 @@ async def poop(update: Update, context: ContextTypes.DEFAULT_TYPE):
         """ 
 
 async def count(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(
-        chat_id=update.effective_chat.id,
-        text= rw.count()
-    )
+    try:
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text= rw.count()
+        )
+    except:
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text= "no hay cagadas"
+        )
+
+async def clear(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    try:
+        rw.clear()
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text= "GRACIAS POR TIRAR DE LA CISTERNA"
+        )
+    except:
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text= "base de datos pendiente de revisión"
+        )
 
 async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
@@ -67,6 +86,7 @@ if __name__ == '__main__':
 
     poop_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), poop)
     count_handler = CommandHandler('count',count)
+    clear_handler = CommandHandler('clear',clear)
     unknown_handler = MessageHandler(filters.COMMAND, unknown)
 
     #application.add_handler(start_handler)
@@ -75,6 +95,7 @@ if __name__ == '__main__':
 
     application.add_handler(poop_handler)
     application.add_handler(count_handler)
+    application.add_handler(clear_handler)
     application.add_handler(unknown_handler) # siempre el último en ser añadido
 
     
