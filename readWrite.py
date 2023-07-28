@@ -13,10 +13,6 @@ date_format = '%Y-%m-%d'
 #formato -> nombre;fecha;hora
 
 def add(name: string, date: datetime):
-    """
-    if(not os.path.isfile(nameFile)):
-        file.close()
-    """
 
     os.path.isfile(nameFileExtension)
 
