@@ -58,7 +58,7 @@ if __name__ == '__main__':
 
     application.add_handler(poop_handler)
     application.add_handler(count_handler)
-    application.add_handler(clear_handler)
+    #application.add_handler(clear_handler)
     application.add_handler(unknown_handler) # siempre el último en ser añadido
 
     
